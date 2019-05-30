@@ -148,10 +148,13 @@ export default class SingleEliminationTournament{
 
     public static CreateObjectFromJson(data:SingleEliminationTournament){
         var newTourney = new SingleEliminationTournament(0, '', 0, 0, '');
-        var keys = Object.keys(newTourney);
-        keys.forEach(key => {
-            newTourney[key] = data[key];
-        });
-        return newTourney;
+        if(data){
+            var keys = Object.keys(newTourney);
+            keys.forEach(key => {
+                newTourney[key] = data[key];
+            });
+            return newTourney;
+        }
+        return null;
     }
 }
