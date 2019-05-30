@@ -2,7 +2,7 @@
 import BaseUserData from '../models/user/BaseUserData';
 import {UserData} from '../models/user/UserData';
 import ValidateSig from './Cryptography'
-class UserModule {
+export default class UserModule {
     public static async CreateUser(data: BaseUserData) {
         if(ValidateSig(data.signature, data.id)){
             const db = client.db('TournamentData');
@@ -12,8 +12,11 @@ class UserModule {
                 var newUser = new UserData(data);
                 await userCollec.insertOne(newUser);
                 console.log('User created');
+                return true;
             }
+            return false;
         }
+        return false;
     }
     public static async UpdateUser(data: BaseUserData){
         if(ValidateSig(data.signature, data.id)){
@@ -24,8 +27,11 @@ class UserModule {
                 user.userName =  data.nickName;
                 user.discordId = data.discordId;
                 await userCollec.replaceOne({_id : data.id.toLowerCase()}, user);
+                return true;
             }
+            return false;
         }
+        return false;
     }
     public static async UpdateUserInternal(data: UserData){
         const db = client.db('TournamentData');
@@ -47,8 +53,10 @@ class UserModule {
             var user = await this.GetUser(data.id);
             if(user){
                 await userCollec.deleteOne({_id : data.id.toLowerCase()});
+                return true;
             }
+            return false;
         }
+        return false;
     }
 }
-export {UserModule};

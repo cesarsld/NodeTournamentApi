@@ -1,5 +1,5 @@
 import { client } from '../mongo/mongo';
-import { UserModule } from '../modules/UserModule';
+import UserModule from '../modules/UserModule';
 import SingleEliminationTournament from '../models/SingleElimination/SingleEliminationTournament';
 import { TournamentState } from '../models/SingleElimination/TournamentStateEnum';
 import TourneyCreationData from '../models/SingleElimination/TourneyCreationData';

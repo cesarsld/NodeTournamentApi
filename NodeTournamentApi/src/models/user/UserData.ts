@@ -1,7 +1,5 @@
 ﻿import CompletedTournament from "../SingleElimination/CompletedTournaments";
 import BaseUserData from "./BaseUserData";
-import * as mongoose from 'mongoose';
-import * as mongodb from 'mongodb';
 class UserData {
     _id: string;
     discordId: number;
@@ -23,32 +21,14 @@ class UserData {
         this.completedCreatedTournaments = new Array();
     }
 
-    ReturnSchema() { }
+    public static CreateObjectFromJson(data:UserData){
+        var user = new UserData(new BaseUserData());
+        var keys = Object.keys(user);
+        keys.forEach(key => {
+            user[key] = data[key];
+        });
+        return user;
+    }
 }
-
-var completedTournamentSchema: mongoose.Schema = new mongoose.Schema({
-    id: String,
-    rnaking: Number
-});
-
-var UserDataSchema: mongoose.Schema = new mongoose.Schema({
-    id: { type: String, unique: true, required : true },
-    discordId: Number,
-    userName: String,
-    ongoingTournaments: {
-        type: [completedTournamentSchema]
-    },
-    completedTournaments: {
-        type: [completedTournamentSchema]
-    },
-    ongoingCreatedTournaments: {
-        type: [completedTournamentSchema]
-    },
-    completedCreatedTournaments: {
-        type: [completedTournamentSchema]
-    },
-});
-
-var User = mongoose.model("UserTest", UserDataSchema);
  
 export  {UserData};

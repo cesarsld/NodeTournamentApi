@@ -6,7 +6,7 @@ import ChallengeData from './ChallengeData';
 import { UserData } from '../user/UserData';
 import ChallongeModule from '../../modules/ChallongeModule';
 import CompletedTournament from './CompletedTournaments';
-import { UserModule } from '../../modules/UserModule';
+import UserModule from '../../modules/UserModule';
 export default class SingleEliminationTournament{
     _id: string;
     challongeId:number;
@@ -148,21 +148,10 @@ export default class SingleEliminationTournament{
 
     public static CreateObjectFromJson(data:SingleEliminationTournament){
         var newTourney = new SingleEliminationTournament(0, '', 0, 0, '');
-        newTourney._id = data._id;
-        newTourney.challongeId = data.challongeId;
-        newTourney.creatorAddress = data.creatorAddress;
-        newTourney.creatorName = data.creatorName;
-        newTourney.tourneyState = data.tourneyState;
-        newTourney.secondsBetweenRounds = data.secondsBetweenRounds;
-        newTourney.boFormat = data.boFormat;
-        newTourney.maxPlayers = data.maxPlayers;
-        newTourney.totalRoundNumber = data.totalRoundNumber;
-        newTourney.currentRoundTime = data.currentRoundTime;
-        newTourney.currentRound = data.currentRound;
-        newTourney.participantList = data.participantList;
-        newTourney.matchUpList = data.matchUpList;
-        newTourney.indexOfUnresolvedMatches = data.indexOfUnresolvedMatches;
-        newTourney.winner = data.winner;
+        var keys = Object.keys(newTourney);
+        keys.forEach(key => {
+            newTourney[key] = data[key];
+        });
         return newTourney;
     }
 }

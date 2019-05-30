@@ -1,14 +1,10 @@
-﻿import app from "./app";
-const PORT = 1337;
-import {UserModule} from './modules/UserModule';
-import BaseUserData from './models/user/BaseUserData';
-import {client} from './mongo/mongo';
-import * as rp from 'request-promise';
+﻿import * as dotenv from "dotenv";
+import app from "./app";
+dotenv.config();
+var port = process.env.PORT || 1337;
 require ('./mongo/mongo');
 require('./controllers/TourneyController');
-//(async () => {
-//})();
-
-app.listen(PORT, () => {
-    console.log('Express server listening on port ' + PORT);
+require('./controllers/UserController');
+app.listen(port, () => {
+    console.log('Express server listening on port ' + port);
 })
