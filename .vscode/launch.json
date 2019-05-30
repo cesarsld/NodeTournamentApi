@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\NodeTournamentApi\\src\\server.ts",
+            "program": "${workspaceFolder}\\src\\server.ts",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
